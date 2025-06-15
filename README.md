@@ -18,14 +18,7 @@
 
 ## Installation
 
-Clone or download this repository and open `index.html` in any modern web browser. No server setup required.
-
-bash
-git clone https://github.com/yourusername/fgm.git
-cd fgm
-open index.html
-
-Alternatively, you can host it on any static site hosting platform (GitHub Pages, Netlify, etc.).
+Simply, access the repository website
 
 
 ---
