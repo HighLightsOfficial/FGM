@@ -82,7 +82,7 @@ FixiumProfiler: Collects and logs detailed performance stats.
 
 Links & Resources
 
-Fixium Plugin GitHub
+[Fixium Plugin GitHub](https://github.com/HighLightsOfficial/Fixium)
 
 [Fixium Graphic Maker Demo](https://highlightsofficial.github.io/FGM/)
 
