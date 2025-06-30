@@ -1,126 +1,150 @@
-/* Reset y base */
+/* Base Reset */
 * {
-  box-sizing: border-box;
   margin: 0;
   padding: 0;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  box-sizing: border-box;
+  font-family: 'Segoe UI', Tahoma, sans-serif;
 }
 
+/* Body Styling */
 body {
-  background: #f9fcff;
-  color: #004d99;
-  min-height: 100vh;
+  background: #f3f9ff;
+  color: #003366;
   display: flex;
   flex-direction: column;
+  min-height: 100vh;
 }
 
-/* Header fijo */
+/* Header */
 header {
-  background-color: #007acc;
+  background: #005fa3;
   color: white;
-  padding: 25px 15px;
+  padding: 30px 20px;
   text-align: center;
-  box-shadow: 0 3px 8px rgba(0, 122, 204, 0.3);
-  position: sticky;
-  top: 0;
-  z-index: 1000;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
 }
 
 header h1 {
-  font-weight: 700;
-  font-size: 2.2rem;
-  letter-spacing: 1.4px;
-  margin-bottom: 5px;
+  font-size: 2.5rem;
+  margin-bottom: 8px;
+  letter-spacing: 1px;
 }
 
 header p {
-  font-weight: 400;
   font-size: 1rem;
   opacity: 0.85;
 }
 
-/* Contenedor principal */
+/* Container */
 .container {
-  flex-grow: 1;
-  max-width: 900px;
   width: 90%;
-  margin: 40px auto 50px;
+  max-width: 960px;
+  margin: 40px auto;
   background: white;
-  padding: 30px 35px;
+  padding: 35px 40px;
   border-radius: 14px;
-  box-shadow: 0 8px 30px rgba(0, 122, 204, 0.15);
-  display: flex;
-  flex-direction: column;
+  box-shadow: 0 6px 30px rgba(0, 96, 165, 0.15);
+  flex-grow: 1;
+}
+
+/* Labels */
+.label {
+  display: block;
+  font-weight: bold;
+  margin-bottom: 8px;
+  font-size: 1.1rem;
 }
 
 /* Textarea */
 textarea {
   width: 100%;
-  height: 180px;
-  padding: 15px 18px;
-  border-radius: 10px;
+  height: 160px;
+  padding: 15px;
+  font-size: 14px;
   border: 2px solid #007acc;
+  border-radius: 10px;
   resize: vertical;
-  font-family: 'Source Code Pro', monospace, monospace;
-  font-size: 15px;
+  background: #e7f4ff;
+  color: #002b4d;
+  font-family: monospace;
   margin-bottom: 20px;
-  color: #003366;
-  background: #e7f2ff;
-  transition: border-color 0.3s ease, background-color 0.3s ease;
 }
 
 textarea:focus {
   outline: none;
+  background: #d1e9ff;
+  box-shadow: 0 0 8px rgba(0, 96, 165, 0.4);
   border-color: #005fa3;
-  background: #d3e9ff;
-  box-shadow: 0 0 10px rgba(0, 122, 204, 0.4);
 }
 
-/* Botón */
+/* Button */
 button {
-  align-self: flex-start;
-  background: linear-gradient(135deg, #00aaff, #007acc);
-  color: white;
+  background: linear-gradient(to right, #007acc, #005fa3);
   border: none;
-  padding: 15px 32px;
-  font-size: 16px;
-  font-weight: 700;
-  border-radius: 12px;
+  color: white;
+  padding: 12px 28px;
+  font-size: 15px;
+  border-radius: 10px;
   cursor: pointer;
-  transition: background-color 0.3s ease, box-shadow 0.3s ease;
-  margin-bottom: 30px;
-  box-shadow: 0 5px 15px rgba(0, 122, 204, 0.3);
+  font-weight: bold;
+  box-shadow: 0 4px 12px rgba(0, 122, 204, 0.25);
+  transition: all 0.25s ease-in-out;
 }
 
 button:hover {
-  background: linear-gradient(135deg, #007acc, #005fa3);
-  box-shadow: 0 8px 25px rgba(0, 122, 204, 0.55);
+  background: linear-gradient(to right, #005fa3, #00497c);
+  box-shadow: 0 6px 20px rgba(0, 122, 204, 0.4);
 }
 
-/* Mensajes de error */
+/* Error Message */
 #errorMsg {
   color: #cc0000;
+  font-size: 0.95rem;
   font-weight: 600;
-  font-size: 1rem;
-  margin-bottom: 20px;
-  min-height: 22px;
-  transition: opacity 0.3s ease;
+  margin-top: 10px;
+  min-height: 20px;
 }
 
-/* Contenedor gráfico */
+/* Chart Container */
 #chartContainer {
-  position: relative;
+  margin-top: 40px;
   width: 100%;
   height: 450px;
+  background: #fafafa;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.05);
+}
+
+/* Instructions */
+#instructions {
+  margin-top: 50px;
+  font-size: 0.95rem;
+  color: #444;
+}
+
+#instructions h2 {
+  margin-bottom: 15px;
+  font-size: 1.3rem;
+  color: #003366;
+}
+
+#instructions pre {
+  background: #f0f4f8;
+  padding: 15px;
+  border-radius: 8px;
+  overflow-x: auto;
+  margin: 15px 0;
+  font-family: monospace;
 }
 
 /* Footer */
 footer {
+  background: #f3f9ff;
+  padding: 20px 10px;
   text-align: center;
+  font-size: 0.85rem;
   color: #007acc;
-  font-size: 14px;
-  padding: 15px 10px;
   border-top: 1px solid #cce6ff;
-  background-color: #f9fcff;
   font-style: italic;
 }
