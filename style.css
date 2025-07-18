@@ -1,15 +1,14 @@
-/* Base Reset */
+/* Font & Base */
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: 'Segoe UI', Tahoma, sans-serif;
 }
 
-/* Body Styling */
 body {
-  background: #f3f9ff;
-  color: #003366;
+  font-family: 'Poppins', sans-serif;
+  background: linear-gradient(to top left, #cce6ff, #e6f7ff);
+  color: #002244;
   display: flex;
   flex-direction: column;
   min-height: 100vh;
@@ -17,64 +16,68 @@ body {
 
 /* Header */
 header {
-  background: #005fa3;
+  background: #003d66;
   color: white;
-  padding: 30px 20px;
+  padding: 50px 20px;
   text-align: center;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
 }
 
 header h1 {
-  font-size: 2.5rem;
-  margin-bottom: 8px;
+  font-size: 2.8rem;
   letter-spacing: 1px;
+  margin-bottom: 10px;
 }
 
 header p {
-  font-size: 1rem;
-  opacity: 0.85;
-}
-
-/* Container */
-.container {
-  width: 90%;
-  max-width: 960px;
-  margin: 40px auto;
-  background: white;
-  padding: 35px 40px;
-  border-radius: 14px;
-  box-shadow: 0 6px 30px rgba(0, 96, 165, 0.15);
-  flex-grow: 1;
-}
-
-/* Labels */
-.label {
-  display: block;
-  font-weight: bold;
-  margin-bottom: 8px;
   font-size: 1.1rem;
+  opacity: 0.9;
+}
+
+/* Glass Container */
+.container.glass {
+  width: 92%;
+  max-width: 1000px;
+  margin: 40px auto;
+  padding: 40px;
+  border-radius: 20px;
+  background: rgba(255, 255, 255, 0.35);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  flex-grow: 1;
+  animation: fadeIn 0.6s ease-out;
 }
 
 /* Textarea */
 textarea {
   width: 100%;
-  height: 160px;
-  padding: 15px;
-  font-size: 14px;
+  height: 170px;
+  padding: 18px;
+  font-size: 15px;
   border: 2px solid #007acc;
-  border-radius: 10px;
+  border-radius: 14px;
   resize: vertical;
-  background: #e7f4ff;
-  color: #002b4d;
+  background: rgba(235, 248, 255, 0.8);
+  color: #002244;
   font-family: monospace;
   margin-bottom: 20px;
 }
 
 textarea:focus {
   outline: none;
-  background: #d1e9ff;
+  background: #daf0ff;
   box-shadow: 0 0 8px rgba(0, 96, 165, 0.4);
   border-color: #005fa3;
+}
+
+/* Labels */
+.label {
+  font-weight: 600;
+  font-size: 1.1rem;
+  margin-bottom: 10px;
+  display: block;
 }
 
 /* Button */
@@ -82,69 +85,95 @@ button {
   background: linear-gradient(to right, #007acc, #005fa3);
   border: none;
   color: white;
-  padding: 12px 28px;
-  font-size: 15px;
-  border-radius: 10px;
+  padding: 13px 30px;
+  font-size: 16px;
+  border-radius: 12px;
   cursor: pointer;
   font-weight: bold;
-  box-shadow: 0 4px 12px rgba(0, 122, 204, 0.25);
-  transition: all 0.25s ease-in-out;
+  box-shadow: 0 4px 14px rgba(0, 122, 204, 0.3);
+  transition: all 0.3s ease;
 }
 
 button:hover {
-  background: linear-gradient(to right, #005fa3, #00497c);
-  box-shadow: 0 6px 20px rgba(0, 122, 204, 0.4);
+  background: linear-gradient(to right, #005fa3, #004b7a);
+  transform: scale(1.03);
 }
 
-/* Error Message */
+/* Error */
 #errorMsg {
   color: #cc0000;
   font-size: 0.95rem;
   font-weight: 600;
   margin-top: 10px;
-  min-height: 20px;
+  min-height: 22px;
 }
 
-/* Chart Container */
+/* Chart */
 #chartContainer {
   margin-top: 40px;
-  width: 100%;
-  height: 450px;
-  background: #fafafa;
-  padding: 20px;
-  border-radius: 12px;
-  box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.05);
+  padding: 25px;
+  background: #ffffffee;
+  border-radius: 16px;
+  box-shadow: inset 0 0 8px rgba(0, 0, 0, 0.05);
 }
 
 /* Instructions */
 #instructions {
-  margin-top: 50px;
-  font-size: 0.95rem;
-  color: #444;
+  margin-top: 60px;
+  font-size: 0.96rem;
+  color: #333;
 }
 
 #instructions h2 {
+  font-size: 1.4rem;
   margin-bottom: 15px;
-  font-size: 1.3rem;
   color: #003366;
 }
 
 #instructions pre {
-  background: #f0f4f8;
-  padding: 15px;
-  border-radius: 8px;
+  background: #f0f8ff;
+  padding: 16px;
+  border-radius: 10px;
   overflow-x: auto;
-  margin: 15px 0;
   font-family: monospace;
+  margin: 18px 0;
 }
 
 /* Footer */
 footer {
   background: #f3f9ff;
-  padding: 20px 10px;
+  padding: 20px 12px;
   text-align: center;
-  font-size: 0.85rem;
+  font-size: 0.9rem;
   color: #007acc;
   border-top: 1px solid #cce6ff;
   font-style: italic;
 }
+
+/* Animations */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(15px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+  header h1 {
+    font-size: 2rem;
+  }
+
+  .container.glass {
+    padding: 25px;
+  }
+
+  button {
+    width: 100%;
+    text-align: center;
+  }
+  }
