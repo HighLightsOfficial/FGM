@@ -7,7 +7,7 @@
 
 body {
   font-family: 'Poppins', sans-serif;
-  background: linear-gradient(to top left, #cce6ff, #e6f7ff);
+  background: linear-gradient(to top left, #e6f7ff, #cce6ff);
   color: #002244;
   display: flex;
   flex-direction: column;
@@ -37,14 +37,14 @@ header p {
 /* Glass Container */
 .container.glass {
   width: 92%;
-  max-width: 1000px;
+  max-width: 1100px;
   margin: 40px auto;
   padding: 40px;
   border-radius: 20px;
   background: rgba(255, 255, 255, 0.35);
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
   border: 1px solid rgba(255, 255, 255, 0.25);
   flex-grow: 1;
   animation: fadeIn 0.6s ease-out;
@@ -59,16 +59,17 @@ textarea {
   border: 2px solid #007acc;
   border-radius: 14px;
   resize: vertical;
-  background: rgba(235, 248, 255, 0.8);
+  background: rgba(235, 248, 255, 0.9);
   color: #002244;
   font-family: monospace;
   margin-bottom: 20px;
+  transition: all 0.3s ease;
 }
 
 textarea:focus {
   outline: none;
   background: #daf0ff;
-  box-shadow: 0 0 8px rgba(0, 96, 165, 0.4);
+  box-shadow: 0 0 12px rgba(0, 96, 165, 0.4);
   border-color: #005fa3;
 }
 
@@ -111,10 +112,20 @@ button:hover {
 /* Chart */
 #chartContainer {
   margin-top: 40px;
-  padding: 25px;
+}
+
+.chart-wrapper {
   background: #ffffffee;
+  padding: 25px;
   border-radius: 16px;
   box-shadow: inset 0 0 8px rgba(0, 0, 0, 0.05);
+  width: 100%;
+  height: 400px; /* fixed height to prevent shrinking */
+}
+
+#perfChart {
+  width: 100% !important;
+  height: 100% !important;
 }
 
 /* Instructions */
@@ -152,28 +163,14 @@ footer {
 
 /* Animations */
 @keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(15px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+  from { opacity: 0; transform: translateY(15px); }
+  to { opacity: 1; transform: translateY(0); }
 }
 
 /* Responsive */
 @media (max-width: 600px) {
-  header h1 {
-    font-size: 2rem;
-  }
-
-  .container.glass {
-    padding: 25px;
-  }
-
-  button {
-    width: 100%;
-    text-align: center;
-  }
-}
+  header h1 { font-size: 2rem; }
+  .container.glass { padding: 25px; }
+  button { width: 100%; text-align: center; }
+  .chart-wrapper { height: 300px; }
+                              }
