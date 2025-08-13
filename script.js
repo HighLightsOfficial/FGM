@@ -1,10 +1,10 @@
-const ctx = document.getElementById('perfChart').getContext('2d');
+const canvas = document.getElementById('perfChart');
+const ctx = canvas.getContext('2d');
 
 let chart = null;
 let previousData = null;
 
 function parseSnapshotCode(code) {
-  // Buscamos la línea que contiene el campo encoded:
   const lines = code.trim().split('\n');
   let encoded = null;
   for (const line of lines) {
@@ -13,123 +13,80 @@ function parseSnapshotCode(code) {
       break;
     }
   }
-  if (!encoded) {
-    return { error: "No se encontró el campo 'encoded' en el snapshot." };
-  }
+  if (!encoded) return { error: "No se encontró el campo 'encoded' en el snapshot." };
 
-  // Decodificamos base64 y parseamos JSON
-  let parsed = null;
   try {
-    const jsonString = atob(encoded);
-    parsed = JSON.parse(jsonString);
-  } catch (err) {
+    const parsed = JSON.parse(atob(encoded));
+    return {
+      memory: parsed.m,
+      entities: parsed.e,
+      players: parsed.p,
+      tps: parsed.tps
+    };
+  } catch {
     return { error: "Error al decodificar o parsear el campo 'encoded'." };
   }
-
-  // Mapear claves cortas a completas
-  const data = {
-    memory: parsed.m,
-    entities: parsed.e,
-    players: parsed.p,
-    tps: parsed.tps
-  };
-
-  return data;
 }
 
 function validateData(data) {
   if (data.error) return data.error;
-
-  const requiredKeys = ['memory', 'entities', 'players', 'tps'];
-  for (const key of requiredKeys) {
-    if (!(key in data) || typeof data[key] !== 'number' || isNaN(data[key])) {
-      return `Error: falta o es inválido el campo "${key}"`;
+  const keys = ['memory', 'entities', 'players', 'tps'];
+  for (const k of keys) {
+    if (!(k in data) || typeof data[k] !== 'number' || isNaN(data[k])) {
+      return `Error: falta o es inválido el campo "${k}"`;
     }
   }
-  if (data.tps < 0 || data.tps > 20) {
-    return 'Error: TPS fuera de rango (0-20)';
-  }
+  if (data.tps < 0 || data.tps > 20) return 'Error: TPS fuera de rango (0-20)';
   return null;
 }
 
 function createChart(data1, data2) {
   const labels = ['Memoria (MB)', 'Entidades', 'Jugadores', 'TPS'];
 
-  const dataset1 = {
+  const datasets = [{
     label: 'Snapshot Actual',
     data: [data1.memory, data1.entities, data1.players, data1.tps],
     backgroundColor: 'rgba(0, 170, 255, 0.75)',
     borderColor: 'rgba(0, 170, 255, 1)',
     borderWidth: 2,
     borderRadius: 6
-  };
-
-  const datasets = [dataset1];
+  }];
 
   if (data2) {
-    const dataset2 = {
+    datasets.push({
       label: 'Snapshot Anterior',
       data: [data2.memory, data2.entities, data2.players, data2.tps],
       backgroundColor: 'rgba(0, 122, 204, 0.7)',
       borderColor: 'rgba(0, 122, 204, 1)',
       borderWidth: 2,
       borderRadius: 6
-    };
-    datasets.push(dataset2);
+    });
   }
 
-  if (chart) {
-    chart.destroy();
-  }
+  if (chart) chart.destroy();
 
   chart = new Chart(ctx, {
     type: 'bar',
-    data: {
-      labels: labels,
-      datasets: datasets
-    },
+    data: { labels, datasets },
     options: {
+      maintainAspectRatio: false,
       responsive: true,
-      animation: {
-        duration: 600,
-        easing: 'easeInOutQuart'
-      },
+      animation: { duration: 600, easing: 'easeInOutQuart' },
       scales: {
         y: {
           beginAtZero: true,
           grace: '10%',
-          ticks: {
-            color: '#004d99',
-            font: { weight: '600', size: 13 }
-          },
-          grid: {
-            color: 'rgba(0, 122, 204, 0.15)'
-          }
+          ticks: { color: '#004d99', font: { weight: '600', size: 13 } },
+          grid: { color: 'rgba(0, 122, 204, 0.15)' }
         },
         x: {
-          ticks: {
-            color: '#004d99',
-            font: { weight: '700', size: 14 }
-          },
-          grid: {
-            display: false
-          }
+          ticks: { color: '#004d99', font: { weight: '700', size: 14 } },
+          grid: { display: false }
         }
       },
       plugins: {
-        legend: {
-          position: 'top',
-          labels: {
-            font: { size: 15, weight: '700' },
-            color: '#004d99'
-          }
-        },
-        tooltip: {
-          enabled: true,
-          backgroundColor: 'rgba(0, 122, 204, 0.85)',
-          titleFont: { size: 16, weight: '700' },
-          bodyFont: { size: 14 }
-        }
+        legend: { position: 'top', labels: { font: { size: 15, weight: '700' }, color: '#004d99' } },
+        tooltip: { enabled: true, backgroundColor: 'rgba(0, 122, 204, 0.85)', titleFont: { size: 16, weight: '700' }, bodyFont: { size: 14 } }
       }
     }
   });
@@ -137,20 +94,13 @@ function createChart(data1, data2) {
 
 document.getElementById('generateBtn').addEventListener('click', () => {
   const codeInput = document.getElementById('snapshotCode').value;
-  if (!codeInput.trim()) {
-    showError('Por favor, pega el código del snapshot');
-    return;
-  }
+  if (!codeInput.trim()) return showError('Por favor, pega el código del snapshot');
 
   const parsedData = parseSnapshotCode(codeInput);
   const validationError = validateData(parsedData);
-  if (validationError) {
-    showError(validationError);
-    return;
-  }
+  if (validationError) return showError(validationError);
 
   clearError();
-
   createChart(parsedData, previousData);
 
   localStorage.setItem('latestSnapshot', codeInput);
@@ -179,4 +129,8 @@ window.addEventListener('load', () => {
       createChart(parsedData, null);
     }
   }
+});
+
+window.addEventListener('resize', () => {
+  if (previousData) createChart(previousData, null);
 });
